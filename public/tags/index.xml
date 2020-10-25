@@ -1,0 +1,65 @@
+
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+ <channel>
+   <title>Tags on @Hipony</title>
+   <link>http://example.org/tags/</link>
+   <description>Recent content in Tags on @Hipony</description>
+   <generator>Hugo -- gohugo.io</generator>
+   <language>en-us</language>
+   <copyright>Copyright © 2020 - Alexander Timofeev</copyright>
+   <lastBuildDate>Sat, 24 Oct 2020 16:19:54 +0300</lastBuildDate>
+   
+       <atom:link href="http://example.org/tags/index.xml" rel="self" type="application/rss+xml" />
+   
+   
+     <item>
+       <title>Falsehoods C&#43;&#43; Programmers Believe About Standard Version Support</title>
+       <link>http://example.org/posts/standard-support/</link>
+       <pubDate>Sat, 24 Oct 2020 16:19:54 +0300</pubDate>
+       
+       <guid>http://example.org/posts/standard-support/</guid>
+       <description>&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;oh_no&lt;/span&gt;() { &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; __cpluscplus; } &lt;span style=&#34;color:#75715e&#34;&gt;// Check GCC 4.6 and 4.7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;While being occasionally involved in the C++ package management process &lt;a href=&#34;https://github.com/conan-io/conan&#34;&gt;with Conan&lt;/a&gt; I see beginners and even experts alike being very confused about what does it mean to support a certain standard version in multi-platform libraries.&lt;/p&gt;
+&lt;p&gt;Here I&amp;rsquo;ll point out some common misbelieves people have about standard version support.&lt;/p&gt;
+&lt;h2 id=&#34;its-enough-to-know-which-standard-a-library-supports&#34;&gt;It&amp;rsquo;s enough to know which standard a library supports&lt;/h2&gt;
+&lt;p&gt;Very often folks advertise their libraries as &amp;ldquo;A Very Cool C++17 Library!&amp;rdquo;. It&amp;rsquo;s okay to get a general idea of which features we &lt;em&gt;expect&lt;/em&gt; it to have, but it doesn&amp;rsquo;t help us when trying to consume it on arbitrary platforms.&lt;/p&gt;
+&lt;p&gt;Take for example the &lt;a href=&#34;https://github.com/ericniebler/range-v3&#34;&gt;ranges-v3 library&lt;/a&gt;. In the description it says that it supports C++14/17/20, but in the minimal compiler version requirements it says:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Visual Studio 2019 (or later) on Windows, with some caveats due to range-v3&amp;rsquo;s strict conformance requirements: range-v3 needs /permissive- and either /std:c++latest or /std:c++17&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;We need information about the minimal compiler version support&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;compilers-support-a-certain-standard&#34;&gt;Compilers support a certain standard&lt;/h2&gt;
+&lt;p&gt;I often see beginners asking when a certain compiler will support C++XX when they hear that the next ISO standard is published. For people familiar with the C++ ecosystem this question doesn&amp;rsquo;t quit make sense. Compilers start to implement features even before the standard is finalized and may keep doing so for multiple versions forward, gradually releasing separate bits as they&amp;rsquo;re ready.&lt;/p&gt;
+&lt;p&gt;Quite often some features are behind additional compiler flags such as the &lt;code&gt;/permissve-&lt;/code&gt; flag in MSVC (no alternative tokens without it!) or the &lt;code&gt;-lstdc++fs&lt;/code&gt; in GCC (to be able to use &lt;code&gt;std::filesystem&lt;/code&gt; pre GCC 10).&lt;/p&gt;
+&lt;p&gt;Or some features may be in the &lt;code&gt;experimental&lt;/code&gt; namespace, which require quite non-trivial feature detection logic to depend on. In some cases, even if the header is present, &lt;a href=&#34;https://godbolt.org/z/eh76M6&#34;&gt;compilers will not allow to use such headers unless you pass correct flags&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;We need information about additional actions required to enable certain features. The standard flag is the most basic requirement for that&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;library-supports-a-certain-standard&#34;&gt;Library supports a certain standard&lt;/h2&gt;
+&lt;p&gt;As we understand at this point - to determine which standard version a library supports isn&amp;rsquo;t a trivial matter. More so to keep that support during development.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s a very common situation where certain compiler versions support future standards only partially. Take for example GCC 6.4 - it provides &lt;code&gt;experimental/filesystem&lt;/code&gt; and &lt;code&gt;experimental/optional&lt;/code&gt;, but not &lt;code&gt;experimental/variant&lt;/code&gt;. An author may decide to support this platform if the only thing they really need is a cross-platform filesystem implementation without external dependencies.&lt;/p&gt;
+&lt;p&gt;The only compiler version that we can be sure of is the one used during development.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;We must test library against declared minimal compiler versions for each release to keep the support information up to date&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;library-knows-which-compiler-version-it-needs&#34;&gt;Library knows which compiler version it needs&lt;/h2&gt;
+&lt;p&gt;Big industry standard libraries such as &lt;a href=&#34;https://github.com/boostorg/asio/blob/develop/include/boost/asio/detail/config.hpp#L95&#34;&gt;Boost&lt;/a&gt; and &lt;a href=&#34;https://code.woboq.org/qt5/qtbase/src/corelib/global/qcompilerdetection.h.html&#34;&gt;Qt&lt;/a&gt; do a tremendous amount of work to correctly implement reliable cross-platform feature detection and conform to it.&lt;/p&gt;
+&lt;p&gt;The issue is that it&amp;rsquo;s not enough to simply copy paste feature detection logic from big libraries, as a library author one must know where to apply the polyfil macro and it&amp;rsquo;s very tricky to do especially for smaller features.&lt;/p&gt;
+&lt;p&gt;Sometimes authors do a shortcut (I don&amp;rsquo;t have a Mac, how can I know if my library supports it?) and simply check &lt;a href=&#34;https://en.cppreference.com/w/cpp/compiler_support&#34;&gt;public lists of supported features&lt;/a&gt;. But such lists tend to get outdated or contain not a full information, especially with respect to the library support.&lt;/p&gt;
+&lt;p&gt;Until we build our library on a certain compiler version with a certain standard - we can&amp;rsquo;t be sure that our library supports that compiler version.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;We should not reject unknown compiler versions. It&amp;rsquo;s better to try to build and fail&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;compilers-never-lie&#34;&gt;Compilers never lie&lt;/h2&gt;
+&lt;p&gt;Well, not quite. They have &lt;em&gt;bugs&lt;/em&gt; instead. Or sometimes &lt;a href=&#34;https://godbolt.org/z/6PaK5T&#34;&gt;they&amp;rsquo;re not required to provide diagnostic&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A common misconception is that we can ask a compiler nicely which feature it supports and everything will be &lt;em&gt;fine&lt;/em&gt;. But what if a certain version of a compiler doesn&amp;rsquo;t provide a list of known features? What if the information it provides isn&amp;rsquo;t &lt;em&gt;granular&lt;/em&gt; enough?&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Did you know that CMake discourages the use of &lt;em&gt;granular&lt;/em&gt; &lt;code&gt;target_compile_features&lt;/code&gt; in favor of &amp;lsquo;meta&amp;rsquo; features such as &lt;code&gt;cxx_std_17&lt;/code&gt;?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;The only reliable way to detect standard feature support is to try to compile the code itself and run its tests&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;We need information about the minimal compiler version support&lt;/li&gt;
+&lt;li&gt;We need information about additional actions required to enable certain features. The standard flag is the most basic requirement for that&lt;/li&gt;
+&lt;li&gt;We must test library against declared minimal compiler versions for each release to keep the support information up to date&lt;/li&gt;
+&lt;li&gt;We should not reject unknown compiler versions. It&amp;rsquo;s better to try to build and fail&lt;/li&gt;
+&lt;li&gt;The only reliable way to detect standard feature support is to try to compile the code itself and run its tests&lt;/li&gt;
+&lt;/ul&gt;</description>
+     </item>
+   
+ </channel>
+</rss>

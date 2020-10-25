@@ -1,0 +1,171 @@
+<!doctype html>
+
+<html lang="en-us">
+
+<head>
+  <title>Falsehoods C&#43;&#43; Programmers Believe About Standard Version Support - @Hipony</title>
+  <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="The HTML5 Herald" />
+<meta name="author" content="" /><meta property="og:title" content="Falsehoods C&#43;&#43; Programmers Believe About Standard Version Support" />
+<meta property="og:description" content="int oh_no() { return __cpluscplus; } // Check GCC 4.6 and 4.7
+While being occasionally involved in the C&#43;&#43; package management process with Conan I see beginners and even experts alike being very confused about what does it mean to support a certain standard version in multi-platform libraries.
+Here I&rsquo;ll point out some common misbelieves people have about standard version support." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/standard-support/" />
+<meta property="article:published_time" content="2020-10-24T16:19:54+03:00" />
+<meta property="article:modified_time" content="2020-10-24T16:19:54+03:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Falsehoods C&#43;&#43; Programmers Believe About Standard Version Support"/>
+<meta name="twitter:description" content="int oh_no() { return __cpluscplus; } // Check GCC 4.6 and 4.7
+While being occasionally involved in the C&#43;&#43; package management process with Conan I see beginners and even experts alike being very confused about what does it mean to support a certain standard version in multi-platform libraries.
+Here I&rsquo;ll point out some common misbelieves people have about standard version support."/>
+
+<meta name="generator" content="Hugo 0.76.5" />
+    
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="http://example.org/fontawesome/css/all.min.css" />
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  
+  
+  <link rel="stylesheet" type="text/css" href="http://example.org/css/styles.css" /></head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="http://example.org/">@Hipony</a>
+            </h1>
+
+      <ul id="social-media">
+      </ul>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+    </ul>
+</nav>
+
+
+    <main>
+
+
+
+
+<article>
+
+    <h1>Falsehoods C&#43;&#43; Programmers Believe About Standard Version Support</h1>
+
+    
+      <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2020-10-24T16:19:54&#43;03:00">Oct 24, 2020</time>
+        </li>
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="http://example.org/tags/cpp">#cpp</a>
+                
+            </em>
+        </li>
+        
+
+        <li>4 minutes read</li>
+    </ul>
+</aside>
+
+    
+
+    
+<div class="featured_image">
+    <a href="http://example.org/posts/standard-support/" title="Falsehoods C&#43;&#43; Programmers Believe About Standard Version Support">
+        <img src="">
+    </a>
+</div>
+
+
+
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">oh_no</span>() { <span style="color:#66d9ef">return</span> __cpluscplus; } <span style="color:#75715e">// Check GCC 4.6 and 4.7
+</span></code></pre></div><p>While being occasionally involved in the C++ package management process <a href="https://github.com/conan-io/conan">with Conan</a> I see beginners and even experts alike being very confused about what does it mean to support a certain standard version in multi-platform libraries.</p>
+<p>Here I&rsquo;ll point out some common misbelieves people have about standard version support.</p>
+<h2 id="its-enough-to-know-which-standard-a-library-supports">It&rsquo;s enough to know which standard a library supports</h2>
+<p>Very often folks advertise their libraries as &ldquo;A Very Cool C++17 Library!&rdquo;. It&rsquo;s okay to get a general idea of which features we <em>expect</em> it to have, but it doesn&rsquo;t help us when trying to consume it on arbitrary platforms.</p>
+<p>Take for example the <a href="https://github.com/ericniebler/range-v3">ranges-v3 library</a>. In the description it says that it supports C++14/17/20, but in the minimal compiler version requirements it says:</p>
+<blockquote>
+<p>Visual Studio 2019 (or later) on Windows, with some caveats due to range-v3&rsquo;s strict conformance requirements: range-v3 needs /permissive- and either /std:c++latest or /std:c++17</p>
+</blockquote>
+<p><strong>We need information about the minimal compiler version support</strong>.</p>
+<h2 id="compilers-support-a-certain-standard">Compilers support a certain standard</h2>
+<p>I often see beginners asking when a certain compiler will support C++XX when they hear that the next ISO standard is published. For people familiar with the C++ ecosystem this question doesn&rsquo;t quit make sense. Compilers start to implement features even before the standard is finalized and may keep doing so for multiple versions forward, gradually releasing separate bits as they&rsquo;re ready.</p>
+<p>Quite often some features are behind additional compiler flags such as the <code>/permissve-</code> flag in MSVC (no alternative tokens without it!) or the <code>-lstdc++fs</code> in GCC (to be able to use <code>std::filesystem</code> pre GCC 10).</p>
+<p>Or some features may be in the <code>experimental</code> namespace, which require quite non-trivial feature detection logic to depend on. In some cases, even if the header is present, <a href="https://godbolt.org/z/eh76M6">compilers will not allow to use such headers unless you pass correct flags</a>.</p>
+<p><strong>We need information about additional actions required to enable certain features. The standard flag is the most basic requirement for that</strong>.</p>
+<h2 id="library-supports-a-certain-standard">Library supports a certain standard</h2>
+<p>As we understand at this point - to determine which standard version a library supports isn&rsquo;t a trivial matter. More so to keep that support during development.</p>
+<p>It&rsquo;s a very common situation where certain compiler versions support future standards only partially. Take for example GCC 6.4 - it provides <code>experimental/filesystem</code> and <code>experimental/optional</code>, but not <code>experimental/variant</code>. An author may decide to support this platform if the only thing they really need is a cross-platform filesystem implementation without external dependencies.</p>
+<p>The only compiler version that we can be sure of is the one used during development.</p>
+<p><strong>We must test library against declared minimal compiler versions for each release to keep the support information up to date</strong>.</p>
+<h2 id="library-knows-which-compiler-version-it-needs">Library knows which compiler version it needs</h2>
+<p>Big industry standard libraries such as <a href="https://github.com/boostorg/asio/blob/develop/include/boost/asio/detail/config.hpp#L95">Boost</a> and <a href="https://code.woboq.org/qt5/qtbase/src/corelib/global/qcompilerdetection.h.html">Qt</a> do a tremendous amount of work to correctly implement reliable cross-platform feature detection and conform to it.</p>
+<p>The issue is that it&rsquo;s not enough to simply copy paste feature detection logic from big libraries, as a library author one must know where to apply the polyfil macro and it&rsquo;s very tricky to do especially for smaller features.</p>
+<p>Sometimes authors do a shortcut (I don&rsquo;t have a Mac, how can I know if my library supports it?) and simply check <a href="https://en.cppreference.com/w/cpp/compiler_support">public lists of supported features</a>. But such lists tend to get outdated or contain not a full information, especially with respect to the library support.</p>
+<p>Until we build our library on a certain compiler version with a certain standard - we can&rsquo;t be sure that our library supports that compiler version.</p>
+<p><strong>We should not reject unknown compiler versions. It&rsquo;s better to try to build and fail</strong>.</p>
+<h2 id="compilers-never-lie">Compilers never lie</h2>
+<p>Well, not quite. They have <em>bugs</em> instead. Or sometimes <a href="https://godbolt.org/z/6PaK5T">they&rsquo;re not required to provide diagnostic</a>.</p>
+<p>A common misconception is that we can ask a compiler nicely which feature it supports and everything will be <em>fine</em>. But what if a certain version of a compiler doesn&rsquo;t provide a list of known features? What if the information it provides isn&rsquo;t <em>granular</em> enough?</p>
+<blockquote>
+<p>Did you know that CMake discourages the use of <em>granular</em> <code>target_compile_features</code> in favor of &lsquo;meta&rsquo; features such as <code>cxx_std_17</code>?</p>
+</blockquote>
+<p><strong>The only reliable way to detect standard feature support is to try to compile the code itself and run its tests</strong>.</p>
+<h2 id="conclusion">Conclusion</h2>
+<ul>
+<li>We need information about the minimal compiler version support</li>
+<li>We need information about additional actions required to enable certain features. The standard flag is the most basic requirement for that</li>
+<li>We must test library against declared minimal compiler versions for each release to keep the support information up to date</li>
+<li>We should not reject unknown compiler versions. It&rsquo;s better to try to build and fail</li>
+<li>The only reliable way to detect standard feature support is to try to compile the code itself and run its tests</li>
+</ul>
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        
+    </ul>
+</section>
+  
+    
+    
+  
+
+
+
+
+
+</main>
+    <footer>
+        <h6>Copyright © 2020 - Alexander Timofeev |
+            Rendered by <a href="https://gohugo.io" title="Hugo">Hugo</a> |
+            <a href="http://example.org/index.xml">Subscribe </a></h6>
+    </footer>
+</div>
+<script src="http://example.org/js/scripts.js"></script>
+
+</body>
+
+</html>
+
