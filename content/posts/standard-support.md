@@ -5,7 +5,7 @@ date = 2020-10-24T16:19:54+03:00
 images = []
 tags = ["cpp"]
 categories = []
-draft = true
+draft = false
 +++
 
 ```cpp
