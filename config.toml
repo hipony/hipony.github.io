@@ -1,4 +1,4 @@
-baseURL = "http://example.org/"
+baseURL = "http://hipony.github.io/blog"
 languageCode = "en-us"
 title = "@Hipony"
 theme = "kiera"
