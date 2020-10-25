@@ -1,0 +1,9 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "@Hipony"
+theme = "kiera"
+copyright = "Copyright © 2020 - Alexander Timofeev"
+canonifyurls = true
+
+paginate = 3
+summaryLength = 30
