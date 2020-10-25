@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
  <channel>
    <title>Categories on @Hipony</title>
-   <link>http://hipony.github.io/blog/categories/</link>
+   <link>https://hipony.github.io/blog/categories/</link>
    <description>Recent content in Categories on @Hipony</description>
    <generator>Hugo -- gohugo.io</generator>
    <language>en-us</language>
    <copyright>Copyright © 2020 - Alexander Timofeev</copyright>
    
-       <atom:link href="http://hipony.github.io/blog/categories/index.xml" rel="self" type="application/rss+xml" />
+       <atom:link href="https://hipony.github.io/blog/categories/index.xml" rel="self" type="application/rss+xml" />
    
    
      <item>
        <title>Falsehoods C&#43;&#43; Programmers Believe About Standard Version Support</title>
-       <link>http://hipony.github.io/blog/posts/standard-support/</link>
+       <link>https://hipony.github.io/blog/posts/standard-support/</link>
        <pubDate>Sat, 24 Oct 2020 16:19:54 +0300</pubDate>
        
-       <guid>http://hipony.github.io/blog/posts/standard-support/</guid>
+       <guid>https://hipony.github.io/blog/posts/standard-support/</guid>
        <description>&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;oh_no&lt;/span&gt;() { &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; __cpluscplus; } &lt;span style=&#34;color:#75715e&#34;&gt;// Check GCC 4.6 and 4.7
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;While being occasionally involved in the C++ package management process &lt;a href=&#34;https://github.com/conan-io/conan&#34;&gt;with Conan&lt;/a&gt; I see beginners and even experts alike being very confused about what does it mean to support a certain standard version in multi-platform libraries.&lt;/p&gt;
 &lt;p&gt;Here I&amp;rsquo;ll point out some common misbelieves people have about standard version support.&lt;/p&gt;
