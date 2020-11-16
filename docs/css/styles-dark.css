@@ -8,12 +8,27 @@ body {
   background: #2a2829;
 }
 
+a {
+  color: #efefef;
+  font-weight: bold;
+  text-decoration: none;
+}
+
 p {
   text-align: justify;
 }
 
+p a {
+  color: #e85154;
+}
+
 strong {
   color: #ffffff;
+}
+
+#container main article h2,
+#container main article h3 {
+  margin-top: 60px;
 }
 
 #container {
@@ -35,10 +50,6 @@ strong {
     width: auto;
     margin: 0 1.2em;
   }
-}
-
-#container header {
-  margin-bottom: 1em;
 }
 
 #container header h1 {
@@ -268,12 +279,6 @@ input {
   padding: 0;
 }
 
-a {
-  color: #ffffff;
-  text-decoration: underline;
-  font-weight: bold;
-}
-
 .image,
 figure img,
 img {
@@ -411,26 +416,14 @@ table thead {
 }
 
 blockquote {
-  margin: 1em;
+  margin: 0;
   padding: 1em;
-  position: relative;
+  border-left: 4px solid;
   background-color: #3e3b3c;
-}
-
-blockquote::before {
-  content: "\f10d";
-  font-family: "Font Awesome 5 Free";
-  font-weight: 600;
-  font-size: 1.5em;
-  color: rgba(192, 192, 192, 0.3);
-  position: absolute;
-  left: 6px;
-  top: 0;
 }
 
 @media only screen and (max-width: 800px) {
   blockquote {
-    margin: 1em 0;
     padding: 0.5em;
   }
 }
