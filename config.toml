@@ -1,4 +1,4 @@
-baseURL = "https://hipony.github.io"
+baseURL = "https://hipony.github.io/"
 languageCode = "en-us"
 title = "@Hipony"
 theme = "kiera"
