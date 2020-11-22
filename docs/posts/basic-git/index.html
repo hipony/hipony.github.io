@@ -1,0 +1,310 @@
+<!doctype html>
+
+<html lang="en-us">
+
+<head>
+  <title>Git 101 - @Hipony</title>
+  <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="The HTML5 Herald" />
+<meta name="author" content="" /><meta property="og:title" content="Git 101" />
+<meta property="og:description" content="% git commit -am &#39;Hello, World!&#39;
+Git is a version control system that everyone in the industry expects you to know. Although its interface is very counter-intuitive and confusing for beginners - the underlying model is fairly simple.
+So here we&rsquo;ll look into basic Git commands which will be enough for you to go by in any project." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hipony.github.io/posts/basic-git/" />
+<meta property="article:published_time" content="2020-11-20T21:10:51+03:00" />
+<meta property="article:modified_time" content="2020-11-20T21:10:51+03:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Git 101"/>
+<meta name="twitter:description" content="% git commit -am &#39;Hello, World!&#39;
+Git is a version control system that everyone in the industry expects you to know. Although its interface is very counter-intuitive and confusing for beginners - the underlying model is fairly simple.
+So here we&rsquo;ll look into basic Git commands which will be enough for you to go by in any project."/>
+
+<meta name="generator" content="Hugo 0.78.1" />
+    
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://hipony.github.io/fontawesome/css/all.min.css" />
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  
+  
+  <link rel="stylesheet" type="text/css" href="https://hipony.github.io/css/styles.css" /></head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="https://hipony.github.io/">@Hipony</a>
+            </h1>
+
+      <ul id="social-media">
+      </ul>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+    </ul>
+</nav>
+
+
+    <main>
+
+
+
+
+<article>
+
+    <h1>Git 101</h1>
+
+    
+      <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2020-11-20T21:10:51&#43;03:00">Nov 20, 2020</time>
+        </li>
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="https://hipony.github.io/tags/git">#git</a>
+                
+            </em>
+        </li>
+        
+
+        <li>9 minutes read</li>
+    </ul>
+</aside>
+
+    
+
+    
+
+
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git commit -am <span style="color:#e6db74">&#39;Hello, World!&#39;</span>
+</code></pre></div><p>Git is a version control system that everyone in the industry expects you to know. Although its interface is very counter-intuitive and confusing for beginners - the underlying model is fairly simple.</p>
+<p>So here we&rsquo;ll look into basic Git commands which will be enough for you to go by in any project.</p>
+<h2 id="requisites">Requisites</h2>
+<p>I proceed further with an assumption that you already installed Git via whatever means are common on your system, would it be a system package manager or <a href="https://git-scm.com/download/">a direct download link</a>, and that we&rsquo;ll use a terminal to get a better feeling of Git commands.</p>
+<blockquote>
+<p>On Windows, Git comes with a shell executable which I suggest you to use.</p>
+</blockquote>
+<p>While there is a lot of graphical interfaces for Git and you could consider installing them later on - it&rsquo;s always useful to be familiar with the command line. A lot of great tools come with only a command line interface and even for yourself - it&rsquo;s much easier to just write a console application.</p>
+<h2 id="help">Help</h2>
+<p>We start from the most important command in any tool. The <code>--help</code> command.</p>
+<p>When you forget how to work with Git you can always call the <code>git --help</code> to see the list of all commands with a short description. To see a more verbose description for a specific command we can call <code>git &lt;command&gt; --help</code>, for example - <code>git clone --help</code>.</p>
+<p>Be sure to remember about this command when you&rsquo;re uncertain how something does work.</p>
+<h2 id="creating-a-git-repository">Creating a Git Repository</h2>
+<p>Great! We&rsquo;re all set to start experimenting with Git. Let&rsquo;s begin from creating a Git repository. For that, we&rsquo;ll need a folder which we want to start to version control. It doesn&rsquo;t matter how the folder is called because the identity of the project is stored in the embedded <code>.git</code> folder.</p>
+<h3 id="init">Init</h3>
+<p>To start tracking a project we&rsquo;ll use the <code>git init</code> command <em>inside</em> a folder. It&rsquo;ll create an embedded <code>.git</code> folder which will store all our version history.</p>
+<p>Here is an example of creating a folder and create a Git repository in it (I&rsquo;m using the <code>%</code> character to indicate the start of a command):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% mkdir git-101 <span style="color:#f92672">&amp;&amp;</span> cd git-101 <span style="color:#75715e"># Create the folder</span>
+% git init                    <span style="color:#75715e"># Initialize Git repositroy</span>
+Initialized empty Git repository in .../git-101/.git/
+% ls -a                       <span style="color:#75715e"># Check the folder contents</span>
+.git
+</code></pre></div><p>To remove Git from tracking the current folder - it&rsquo;s enough to just remove the inner <code>.git</code> folder. But be careful since it&rsquo;ll remove all the history too.</p>
+<h3 id="default-branch">Default Branch</h3>
+<p>By default, Git will initialize a <em>branch</em> called <code>master</code>. Imagine if in a video game your save files would never get overriden, but preserve all previous save files in its slot and allow to to go back any time. And would allow to <em>branch</em> out to different save files based on the choices you made in the game story.</p>
+<p>We&rsquo;ll talk more about branches a bit later.</p>
+<p>There are multiple different ways to change the name of the created by default branch.</p>
+<ul>
+<li>
+<p>Use the <code>-b &lt;name&gt;</code> command line argument</p>
+</li>
+<li>
+<p>Configurate a global default branch name with: <code>git config --global init.defaultBranch &lt;name&gt;</code>, we&rsquo;ll talk about <code>git config</code> a bit later.</p>
+</li>
+</ul>
+<p>For now, let&rsquo;s try to change the branch name to <code>dev</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% rm -rf .git     <span style="color:#75715e"># Delete a Git repository</span>
+% git init -b dev <span style="color:#75715e"># Create a Git repository with a `dev` default branch</span>
+Initialized empty Git repository in ../git-101/.git/
+</code></pre></div><h2 id="tracking-files">Tracking Files</h2>
+<p>In a Git repository each file can be in one of the two states: <code>tracked</code> or <code>untracked</code>. All files in a new repository are <code>untracked</code> by default. Let&rsquo;s see how to start tracking their versions.</p>
+<h3 id="add">Add</h3>
+<p>To check the state of our repository we can use the <code>git status</code> command.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git status
+On branch dev
+
+No commits yet
+
+nothing to commit <span style="color:#f92672">(</span>create/copy files and use <span style="color:#e6db74">&#34;git add&#34;</span> to track<span style="color:#f92672">)</span>
+</code></pre></div><p>There is quite a lot of information! What we&rsquo;re interested for now is the suggestion</p>
+<blockquote>
+<p>create/copy files and use &ldquo;git add&rdquo; to track</p>
+</blockquote>
+<p>Since our directory is new and empty - there is nothing to track. Let&rsquo;s try to create an empty text file and check again.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% touch file.txt <span style="color:#75715e"># Create an empty file called `file.txt`</span>
+% git status
+On branch dev
+
+No commits yet
+
+Untracked files:
+  <span style="color:#f92672">(</span>use <span style="color:#e6db74">&#34;git add &lt;file&gt;...&#34;</span> to include in what will be committed<span style="color:#f92672">)</span>
+        file.txt
+
+nothing added to commit but untracked files present <span style="color:#f92672">(</span>use <span style="color:#e6db74">&#34;git add&#34;</span> to track<span style="color:#f92672">)</span>
+</code></pre></div><p>The suggestion has changed! We can check that our new <code>file.txt</code> is <code>untracked</code>. Add Git helpfully suggests to use the <code>git add</code> command. Let&rsquo;s try that and see what changes with <code>git status</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git add file.txt <span style="color:#75715e"># Start tracking the file</span>
+% git status
+On branch dev
+
+No commits yet
+
+Changes to be committed:
+  <span style="color:#f92672">(</span>use <span style="color:#e6db74">&#34;git rm --cached &lt;file&gt;...&#34;</span> to unstage<span style="color:#f92672">)</span>
+        new file:   file.txt
+</code></pre></div><p>Now our file is <code>tracked</code> and Git will follow any changes we make to this file. But Git will not keep the history of changes to the file unless we make a &ldquo;save&rdquo; which is called a <em>commit</em> in Git terminology.</p>
+<p>Until we make a commit we can track and untrack files any number of times - it&rsquo;ll not be reflected in the Git history. In case we added a file by accident - we can untrack the file by writing <code>git rm --cached &lt;file&gt;</code> as suggested. Let&rsquo;s do that:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git rm --cached file.txt <span style="color:#75715e"># Untrack the file</span>
+% git status
+On branch dev
+
+No commits yet
+
+Untracked files:
+  <span style="color:#f92672">(</span>use <span style="color:#e6db74">&#34;git add &lt;file&gt;...&#34;</span> to include in what will be committed<span style="color:#f92672">)</span>
+        file.txt
+
+nothing added to commit but untracked files present <span style="color:#f92672">(</span>use <span style="color:#e6db74">&#34;git add&#34;</span> to track<span style="color:#f92672">)</span>
+</code></pre></div><h3 id="config">Config</h3>
+<p>Before we proceed to commiting, Git requires some configuration on your machine. To do that we will use the <code>git config</code> command.</p>
+<h4 id="your-identity">Your Identity</h4>
+<p>You need to fill in your name and email which will be used to mark commit messages that you make so people will know from whom which commit came from. Git designed around multiple working on the same project at once!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git config --global user.name <span style="color:#e6db74">&#34;John Doe&#34;</span>
+% git config --global user.email johndoe@example.com
+</code></pre></div><h4 id="your-editor">Your Editor</h4>
+<p>By default, Git will pick up the system&rsquo;s default editor and quite often it&rsquo;s Vim.</p>
+<p>While quitting Vim is a very common joke among programmers because it&rsquo;s an editor with character - there is very little to laugh at when you only want to learn a version control tool. Its shortcuts and workflows are vastly different from modern day editors and IDEs, so for many folks it could be a challenge to figure out how to even write a commit message.</p>
+<p>To change the editor to the one we&rsquo;re accustomed with we can write these lines:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git config --global core.editor emacs
+<span style="color:#75715e"># OR</span>
+% git config --global core.editor <span style="color:#e6db74">&#34;C:/Program Files/Notepad++/notepad++.exe&#34;</span>
+</code></pre></div><blockquote>
+<p><strong>NOTE</strong> that Git on Windows requires a full path to the editor</p>
+</blockquote>
+<p>You can read more about <code>git config</code> in the <a href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup">Git Book</a>.</p>
+<h3 id="commit">Commit</h3>
+<p>Let&rsquo;s try to &ldquo;save&rdquo; our file in the Git history. When you enter the <code>git commit</code> command - it&rsquo;ll open the editor specified by your configuration to enter a &ldquo;commit message&rdquo;. There are different conventions on what to write in a commit message, but I suggest to use a present simple form starting from a verb. Let&rsquo;s name our commit &ldquo;Add file.txt&rdquo;.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% gut add file.txt
+% git commit
+<span style="color:#f92672">[</span>dev <span style="color:#f92672">(</span>root-commit<span style="color:#f92672">)</span> 5f518df<span style="color:#f92672">]</span> Add file.txt
+ <span style="color:#ae81ff">1</span> file changed, <span style="color:#ae81ff">0</span> insertions<span style="color:#f92672">(</span>+<span style="color:#f92672">)</span>, <span style="color:#ae81ff">0</span> deletions<span style="color:#f92672">(</span>-<span style="color:#f92672">)</span>
+ create mode <span style="color:#ae81ff">100644</span> file.txt
+% git log
+On branch dev
+nothing to commit, working tree clean
+</code></pre></div><h3 id="log">Log</h3>
+<p>And now <code>file.txt</code> state is saved by git. It&rsquo;s committed! You can observe the history of commits with the <code>git log</code> command.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git log
+<span style="color:#75715e"># In editor:</span>
+commit 5f518df3552f322fbf21534b7a8cbc64d638338e <span style="color:#f92672">(</span>HEAD -&gt; dev<span style="color:#f92672">)</span>
+Author: Alexandr Timofeev &lt;alexandr.p.timofeev@gmail.com&gt;
+Date:   Sun Nov <span style="color:#ae81ff">22</span> 20:18:54 <span style="color:#ae81ff">2020</span> +0300
+
+    Add file.txt
+</code></pre></div><blockquote>
+<p>Try out <code>git log --help</code> to see additional arguments that you can pass!</p>
+</blockquote>
+<p>Now let&rsquo;s make a change in the file. For example we&rsquo;ll write <code>Hello, World!</code> in the file.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% echo <span style="color:#e6db74">&#39;Hello, World!&#39;</span> &gt; file.txt <span style="color:#75715e"># Write &#39;Hello, World!&#39; into the `file.txt`</span>
+% git status
+On branch dev
+Changes not staged <span style="color:#66d9ef">for</span> commit:
+  <span style="color:#f92672">(</span>use <span style="color:#e6db74">&#34;git add &lt;file&gt;...&#34;</span> to update what will be committed<span style="color:#f92672">)</span>
+  <span style="color:#f92672">(</span>use <span style="color:#e6db74">&#34;git restore &lt;file&gt;...&#34;</span> to discard changes in working directory<span style="color:#f92672">)</span>
+        modified:   file.txt
+
+no changes added to commit <span style="color:#f92672">(</span>use <span style="color:#e6db74">&#34;git add&#34;</span> and/or <span style="color:#e6db74">&#34;git commit -a&#34;</span><span style="color:#f92672">)</span>
+</code></pre></div><h3 id="diff">Diff</h3>
+<p>To inspect changes that we make we can use the <code>git diff</code> command. You can specify <code>git diff &lt;file&gt;</code> if you only want to see changes in specific files instead of all.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git diff
+diff --git a/file.txt b/file.txt
+index e69de29..8ab686e <span style="color:#ae81ff">100644</span>
+--- a/file.txt
++++ b/file.txt
+@@ -0,0 +1 @@
++Hello, World!
+</code></pre></div><p>When we&rsquo;re finished with the changes - we can make another commit. This time we&rsquo;ll use a shorter version using command line arguments. The <code>a</code> argument will add all <code>modified</code> (not <code>new</code>!) files to the commit and the <code>m</code> argument will allow to write the commit message inline in the terminal instead of the editor.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git commit -am <span style="color:#e6db74">&#39;Hello, World!&#39;</span>
+<span style="color:#f92672">[</span>dev 059f478<span style="color:#f92672">]</span> Hello, World!
+ <span style="color:#ae81ff">1</span> file changed, <span style="color:#ae81ff">1</span> insertion<span style="color:#f92672">(</span>+<span style="color:#f92672">)</span>
+% git log
+commit 059f47894ab061fe195f7302471902bdb7f178df <span style="color:#f92672">(</span>HEAD -&gt; dev<span style="color:#f92672">)</span>
+Author: Alexandr Timofeev &lt;alexandr.p.timofeev@gmail.com&gt;
+Date:   Sun Nov <span style="color:#ae81ff">22</span> 20:38:42 <span style="color:#ae81ff">2020</span> +0300
+
+    Hello, World!
+
+commit 5f518df3552f322fbf21534b7a8cbc64d638338e
+Author: Alexandr Timofeev &lt;alexandr.p.timofeev@gmail.com&gt;
+Date:   Sun Nov <span style="color:#ae81ff">22</span> 20:18:54 <span style="color:#ae81ff">2020</span> +0300
+
+    Add file.txt
+</code></pre></div><h2 id="branches">Branches</h2>
+<p>Now let&rsquo;s talk about <em>branches</em>. Git is designed around distributed development process, allowing you to utilize its full power offline on your local machine. Even if you don&rsquo;t need to share your work - Git is still extremely useful to keep track of working versions that you make, experimenting on side-features or returning back to the last working state.</p>
+<p>git branch
+git checkout -b
+git checkout file
+git merge</p>
+<h2 id="remote">Remote</h2>
+<p>Alright, we&rsquo;ve made some changes in our local Git repository. But how do we share it to cooperate with other developers?</p>
+<p>git remote
+git push
+git clone
+git pull</p>
+<h2 id="everything-else">Everything Else</h2>
+<p>Here we conclude our short introduction of basic commands for Git. Git allows us to use a very vast variety of commands and command arguments, but a lot of them are useful only for very specific cases. Very often they&rsquo;re implemented in terms of basic commands we introduced in here and most of the programmers out there prefer to not bother much and just do the job in a bit more verbose, maybe inefficient, way.</p>
+<p>If you wish to learn more about Git - consider starting from the <a href="https://git-scm.com/book/en/v2">Git Book</a>.</p>
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        <li>
+            <a href="https://hipony.github.io/posts/standard-support/"><i class="fa fa-chevron-circle-left"></i> Falsehoods C&#43;&#43; Programmers Believe About Standard Version Support</a>
+        </li>
+        
+        
+        <li>
+            <a href="https://hipony.github.io/posts/basic-cmake/">CMake 101 <i class="fa fa-chevron-circle-right"></i> </a>
+        </li>
+        
+    </ul>
+</section>
+  
+    
+    
+  
+
+
+
+
+
+</main>
+    <footer>
+        <h6>Copyright © 2020 - Alexander Timofeev |
+            Rendered by <a href="https://gohugo.io" title="Hugo">Hugo</a> |
+            <a href="https://hipony.github.io/index.xml">Subscribe </a></h6>
+    </footer>
+</div>
+<script src="https://hipony.github.io/js/scripts.js"></script>
+
+</body>
+
+</html>
+

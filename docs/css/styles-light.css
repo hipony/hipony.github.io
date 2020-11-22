@@ -21,9 +21,12 @@ p a {
   color: #666666;
 }
 
-#container main article h2,
-#container main article h3 {
+#container main article h2 {
   margin-top: 60px;
+}
+
+#container main article h3 {
+  margin-top: 30px;
 }
 
 #container {
