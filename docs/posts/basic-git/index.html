@@ -13,8 +13,8 @@ Git is a version control system that everyone in the industry expects you to kno
 So here we&rsquo;ll look into basic Git commands which will be enough for you to go by in any project." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hipony.github.io/posts/basic-git/" />
-<meta property="article:published_time" content="2020-11-20T21:10:51+03:00" />
-<meta property="article:modified_time" content="2020-11-20T21:10:51+03:00" />
+<meta property="article:published_time" content="2020-11-24T00:00:00+03:00" />
+<meta property="article:modified_time" content="2020-11-24T00:00:00+03:00" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Git 101"/>
@@ -22,7 +22,7 @@ So here we&rsquo;ll look into basic Git commands which will be enough for you to
 Git is a version control system that everyone in the industry expects you to know. Although its interface is very counter-intuitive and confusing for beginners - the underlying model is fairly simple.
 So here we&rsquo;ll look into basic Git commands which will be enough for you to go by in any project."/>
 
-<meta name="generator" content="Hugo 0.78.1" />
+<meta name="generator" content="Hugo 0.78.2" />
     
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
@@ -66,7 +66,7 @@ So here we&rsquo;ll look into basic Git commands which will be enough for you to
       <aside>
     <ul>
         <li>
-            <time class="post-date" datetime="2020-11-20T21:10:51&#43;03:00">Nov 20, 2020</time>
+            <time class="post-date" datetime="2020-11-24T00:00:00&#43;03:00">Nov 24, 2020</time>
         </li>
         
 
@@ -81,7 +81,7 @@ So here we&rsquo;ll look into basic Git commands which will be enough for you to
         </li>
         
 
-        <li>9 minutes read</li>
+        <li>17 minutes read</li>
     </ul>
 </aside>
 
@@ -146,6 +146,7 @@ nothing to commit <span style="color:#f92672">(</span>create/copy files and use 
 </blockquote>
 <p>Since our directory is new and empty - there is nothing to track. Let&rsquo;s try to create an empty text file and check again.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% touch file.txt <span style="color:#75715e"># Create an empty file called `file.txt`</span>
+
 % git status
 On branch dev
 
@@ -158,6 +159,7 @@ Untracked files:
 nothing added to commit but untracked files present <span style="color:#f92672">(</span>use <span style="color:#e6db74">&#34;git add&#34;</span> to track<span style="color:#f92672">)</span>
 </code></pre></div><p>The suggestion has changed! We can check that our new <code>file.txt</code> is <code>untracked</code>. Add Git helpfully suggests to use the <code>git add</code> command. Let&rsquo;s try that and see what changes with <code>git status</code>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git add file.txt <span style="color:#75715e"># Start tracking the file</span>
+
 % git status
 On branch dev
 
@@ -169,6 +171,7 @@ Changes to be committed:
 </code></pre></div><p>Now our file is <code>tracked</code> and Git will follow any changes we make to this file. But Git will not keep the history of changes to the file unless we make a &ldquo;save&rdquo; which is called a <em>commit</em> in Git terminology.</p>
 <p>Until we make a commit we can track and untrack files any number of times - it&rsquo;ll not be reflected in the Git history. In case we added a file by accident - we can untrack the file by writing <code>git rm --cached &lt;file&gt;</code> as suggested. Let&rsquo;s do that:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git rm --cached file.txt <span style="color:#75715e"># Untrack the file</span>
+
 % git status
 On branch dev
 
@@ -198,18 +201,21 @@ nothing added to commit but untracked files present <span style="color:#f92672">
 <p>You can read more about <code>git config</code> in the <a href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup">Git Book</a>.</p>
 <h3 id="commit">Commit</h3>
 <p>Let&rsquo;s try to &ldquo;save&rdquo; our file in the Git history. When you enter the <code>git commit</code> command - it&rsquo;ll open the editor specified by your configuration to enter a &ldquo;commit message&rdquo;. There are different conventions on what to write in a commit message, but I suggest to use a present simple form starting from a verb. Let&rsquo;s name our commit &ldquo;Add file.txt&rdquo;.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% gut add file.txt
-% git commit
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git add file.txt <span style="color:#75715e"># Prepare files for the commit</span>
+
+% git commit       <span style="color:#75715e"># Do the commit!</span>
 <span style="color:#f92672">[</span>dev <span style="color:#f92672">(</span>root-commit<span style="color:#f92672">)</span> 5f518df<span style="color:#f92672">]</span> Add file.txt
  <span style="color:#ae81ff">1</span> file changed, <span style="color:#ae81ff">0</span> insertions<span style="color:#f92672">(</span>+<span style="color:#f92672">)</span>, <span style="color:#ae81ff">0</span> deletions<span style="color:#f92672">(</span>-<span style="color:#f92672">)</span>
  create mode <span style="color:#ae81ff">100644</span> file.txt
 % git log
 On branch dev
 nothing to commit, working tree clean
-</code></pre></div><h3 id="log">Log</h3>
+</code></pre></div><blockquote>
+<p>We can also specify whole directores such as <code>git add .</code> (prepare all files in the current directory for a commit) for convenience. But know for sure that we will never need certain files in our tracking history - such as build artifacts. <a href="https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository">For that we use the <code>.gitignore</code> file</a>.</p>
+</blockquote>
+<h3 id="log">Log</h3>
 <p>And now <code>file.txt</code> state is saved by git. It&rsquo;s committed! You can observe the history of commits with the <code>git log</code> command.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git log
-<span style="color:#75715e"># In editor:</span>
 commit 5f518df3552f322fbf21534b7a8cbc64d638338e <span style="color:#f92672">(</span>HEAD -&gt; dev<span style="color:#f92672">)</span>
 Author: Alexandr Timofeev &lt;alexandr.p.timofeev@gmail.com&gt;
 Date:   Sun Nov <span style="color:#ae81ff">22</span> 20:18:54 <span style="color:#ae81ff">2020</span> +0300
@@ -220,6 +226,7 @@ Date:   Sun Nov <span style="color:#ae81ff">22</span> 20:18:54 <span style="colo
 </blockquote>
 <p>Now let&rsquo;s make a change in the file. For example we&rsquo;ll write <code>Hello, World!</code> in the file.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% echo <span style="color:#e6db74">&#39;Hello, World!&#39;</span> &gt; file.txt <span style="color:#75715e"># Write &#39;Hello, World!&#39; into the `file.txt`</span>
+
 % git status
 On branch dev
 Changes not staged <span style="color:#66d9ef">for</span> commit:
@@ -241,6 +248,7 @@ index e69de29..8ab686e <span style="color:#ae81ff">100644</span>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git commit -am <span style="color:#e6db74">&#39;Hello, World!&#39;</span>
 <span style="color:#f92672">[</span>dev 059f478<span style="color:#f92672">]</span> Hello, World!
  <span style="color:#ae81ff">1</span> file changed, <span style="color:#ae81ff">1</span> insertion<span style="color:#f92672">(</span>+<span style="color:#f92672">)</span>
+
 % git log
 commit 059f47894ab061fe195f7302471902bdb7f178df <span style="color:#f92672">(</span>HEAD -&gt; dev<span style="color:#f92672">)</span>
 Author: Alexandr Timofeev &lt;alexandr.p.timofeev@gmail.com&gt;
@@ -255,10 +263,256 @@ Date:   Sun Nov <span style="color:#ae81ff">22</span> 20:18:54 <span style="colo
     Add file.txt
 </code></pre></div><h2 id="branches">Branches</h2>
 <p>Now let&rsquo;s talk about <em>branches</em>. Git is designed around distributed development process, allowing you to utilize its full power offline on your local machine. Even if you don&rsquo;t need to share your work - Git is still extremely useful to keep track of working versions that you make, experimenting on side-features or returning back to the last working state.</p>
-<p>git branch
-git checkout -b
-git checkout file
-git merge</p>
+<p>Each branch represents a separate history of commits. In fact, the <em>branch</em> itself is merely a pointer to the last commit in a list of commits, each pointing to the previous one. That way you can have multiple branches that represent exactly the same commits at the same time.</p>
+<h3 id="switch">Switch</h3>
+<p>Let&rsquo;s create a branch!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git branch            <span style="color:#75715e"># See existing branches</span>
+* dev
+
+% git log --oneline     <span style="color:#75715e"># See the log</span>
+059f478 <span style="color:#f92672">(</span>HEAD -&gt; dev<span style="color:#f92672">)</span> Hello, World!
+5f518df Add file.txt
+
+% git branch -c feature <span style="color:#75715e"># Create a branch called feature</span>
+
+% git branch            <span style="color:#75715e"># See existing branches</span>
+* dev
+  feature
+
+% git switch feature    <span style="color:#75715e"># Switch to the feature branch</span>
+
+% git branch            <span style="color:#75715e"># See existing branches</span>
+  dev
+* feature
+
+% git log --oneline     <span style="color:#75715e"># See the log</span>
+059f478 <span style="color:#f92672">(</span>HEAD -&gt; feature, dev<span style="color:#f92672">)</span> Hello, World!
+5f518df Add file.txt
+</code></pre></div><p>Here we get to know the <code>git branch</code> command which is responsible for operations on branches. Don&rsquo;t forget to <code>git branch --help</code> it!</p>
+<p>By default, <code>git branch</code> will show us the list of existing branches and the one we&rsquo;re currently at with the <code>*</code> symbol.</p>
+<p>We can create a copy of the <em>current</em> branch pointer (not the commits themselves), which is the <code>dev</code> branch in our case, by calling the <code>git branch -b &lt;name&gt;</code> command. In our case we create a branch named <code>feature</code>. We can check that it was created with the <code>git branch</code> command.</p>
+<p>But note that we&rsquo;re still on the <code>dev</code> branch. To change the branch you can use the <code>git switch &lt;name&gt;</code> command. In fact there is a shortcut that creates the branch if it&rsquo;s missing - <code>git switch -c &lt;name&gt;</code>.</p>
+<p>Let&rsquo;s create another branch called <code>another</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git switch -c another <span style="color:#75715e"># Create and switch to a new branch</span>
+Switched to a new branch <span style="color:#e6db74">&#39;another&#39;</span>
+
+% git branch            <span style="color:#75715e"># Check that we indeed moved to a new branch</span>
+* another
+  dev
+  feature
+
+% git log --oneline     <span style="color:#75715e"># Now we have three pointers to the latest commit!</span>
+059f478 <span style="color:#f92672">(</span>HEAD -&gt; another, feature, dev<span style="color:#f92672">)</span> Hello, World!
+5f518df Add file.txt
+</code></pre></div><h3 id="restore">Restore</h3>
+<p>Now that we&rsquo;re in an <code>another</code> branch - our work from here on will have a separate history from other branches. Let&rsquo;s do some changes!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% touch another.txt         <span style="color:#75715e"># Create another file</span>
+
+% echo <span style="color:#e6db74">&#39;Oh, No!&#39;</span> &gt; file.txt <span style="color:#75715e"># Overwrite the contents of the `file.txt`</span>
+
+% git status
+On branch another
+Changes not staged <span style="color:#66d9ef">for</span> commit:
+  <span style="color:#f92672">(</span>use <span style="color:#e6db74">&#34;git add &lt;file&gt;...&#34;</span> to update what will be committed<span style="color:#f92672">)</span>
+  <span style="color:#f92672">(</span>use <span style="color:#e6db74">&#34;git restore &lt;file&gt;...&#34;</span> to discard changes in working directory<span style="color:#f92672">)</span>
+        modified:   file.txt
+
+Untracked files:
+  <span style="color:#f92672">(</span>use <span style="color:#e6db74">&#34;git add &lt;file&gt;...&#34;</span> to include in what will be committed<span style="color:#f92672">)</span>
+        another.txt
+
+no changes added to commit <span style="color:#f92672">(</span>use <span style="color:#e6db74">&#34;git add&#34;</span> and/or <span style="color:#e6db74">&#34;git commit -a&#34;</span><span style="color:#f92672">)</span>
+</code></pre></div><p>But before we commit - we decided that we no longer need the changes in the <code>file.txt</code>. To bring back the latest saved state of the file - let&rsquo;s use the <code>git restore file.txt</code> as git friendly suggests us!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git restore file.txt
+
+% git status
+On branch another
+Untracked files:
+  <span style="color:#f92672">(</span>use <span style="color:#e6db74">&#34;git add &lt;file&gt;...&#34;</span> to include in what will be committed<span style="color:#f92672">)</span>
+        another.txt
+
+nothing added to commit but untracked files present <span style="color:#f92672">(</span>use <span style="color:#e6db74">&#34;git add&#34;</span> to track<span style="color:#f92672">)</span>
+</code></pre></div><p>Note that we can&rsquo;t restore an <code>untracked</code> file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git restore another.txt
+error: pathspec <span style="color:#e6db74">&#39;another.txt&#39;</span> did not match any file<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span> known to git
+</code></pre></div><p>What if we already prepared files for the commit?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% echo <span style="color:#e6db74">&#39;Oh, No!&#39;</span> &gt; file.txt    <span style="color:#75715e"># Overwrite the file again</span>
+
+% git add another.txt file.txt <span style="color:#75715e"># Prepare files for the commit</span>
+
+% git status
+On branch another
+Changes to be committed:
+  <span style="color:#f92672">(</span>use <span style="color:#e6db74">&#34;git restore --staged &lt;file&gt;...&#34;</span> to unstage<span style="color:#f92672">)</span>
+        new file:   another.txt
+        modified:   file.txt
+
+% git restore file.txt         <span style="color:#75715e"># Attempt to restore the file</span>
+
+% git status                   <span style="color:#75715e"># It (silently) failed!</span>
+On branch another
+Changes to be committed:
+  <span style="color:#f92672">(</span>use <span style="color:#e6db74">&#34;git restore --staged &lt;file&gt;...&#34;</span> to unstage<span style="color:#f92672">)</span>
+        new file:   another.txt
+        modified:   file.txt
+</code></pre></div><p>Files that are prepared for the commit, but not yet committed are called <code>staged</code> files. To restore them we need to add the <code>--staged</code> argument as Git suggests. But it&rsquo;ll only remove the file from the staging area, it&rsquo;ll not restore the previous committed state.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git restore --staged file.txt
+
+% git status <span style="color:#75715e"># File is still in the modified state!</span>
+On branch another
+Changes to be committed:
+  <span style="color:#f92672">(</span>use <span style="color:#e6db74">&#34;git restore --staged &lt;file&gt;...&#34;</span> to unstage<span style="color:#f92672">)</span>
+        new file:   another.txt
+
+Changes not staged <span style="color:#66d9ef">for</span> commit:
+  <span style="color:#f92672">(</span>use <span style="color:#e6db74">&#34;git add &lt;file&gt;...&#34;</span> to update what will be committed<span style="color:#f92672">)</span>
+  <span style="color:#f92672">(</span>use <span style="color:#e6db74">&#34;git restore &lt;file&gt;...&#34;</span> to discard changes in working directory<span style="color:#f92672">)</span>
+        modified:   file.txt
+
+</code></pre></div><p>We can restore file all at once with a <code>git restore --staged --worktree file.txt</code> or <code>git restore -S -W file.txt</code> for short.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git add file.txt <span style="color:#75715e"># Add the file back in</span>
+
+% git status
+On branch another
+Changes to be committed:
+  <span style="color:#f92672">(</span>use <span style="color:#e6db74">&#34;git restore --staged &lt;file&gt;...&#34;</span> to unstage<span style="color:#f92672">)</span>
+        new file:   another.txt
+        modified:   file.txt
+
+% git restore -S -W file.txt
+
+% git status
+On branch another
+Changes to be committed:
+  <span style="color:#f92672">(</span>use <span style="color:#e6db74">&#34;git restore --staged &lt;file&gt;...&#34;</span> to unstage<span style="color:#f92672">)</span>
+        new file:   another.txt
+</code></pre></div><p>Alright, but what if <em>made</em> a commit which we don&rsquo;t like?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git commit -m <span style="color:#e6db74">&#39;Add another.txt&#39;</span>
+<span style="color:#f92672">[</span>another c96fdd3<span style="color:#f92672">]</span> Add another.txt
+ <span style="color:#ae81ff">1</span> file changed, <span style="color:#ae81ff">0</span> insertions<span style="color:#f92672">(</span>+<span style="color:#f92672">)</span>, <span style="color:#ae81ff">0</span> deletions<span style="color:#f92672">(</span>-<span style="color:#f92672">)</span>
+ create mode <span style="color:#ae81ff">100644</span> another.txt
+
+% git log --oneline
+c96fdd3 <span style="color:#f92672">(</span>HEAD -&gt; another<span style="color:#f92672">)</span> Add another.txt
+059f478 <span style="color:#f92672">(</span>feature, dev<span style="color:#f92672">)</span> Hello, World!
+5f518df Add file.txt
+</code></pre></div><blockquote>
+<p>Note how the <code>another</code> pointer moved, but old ones are pointing to the old commit.</p>
+</blockquote>
+<p>In case of such mistakes we can do two things, either create a new commit that erases our changes with <code>git revert HEAD</code> or to erase the commit altogether with <code>git reset HEAD~1</code>. Note that this is the <code>HEAD</code> from the <code>git log</code> message, it&rsquo;s an alias to the current branch&rsquo;s pointer name.</p>
+<p>Be warned with the <code>git reset</code> - you should only erase a Git history if you&rsquo;re sure that no one has a copy of it. For example, when doing a feature locally before publishing it on a <em>remote</em> repository. After that - just add a commit, since people could start to depend on the commit that you want to erase.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git revert HEAD         <span style="color:#75715e"># Add a commit reverting changes done by the previous one</span>
+Removing another.txt
+<span style="color:#f92672">[</span>another a698d86<span style="color:#f92672">]</span> Revert <span style="color:#e6db74">&#34;Add another.txt&#34;</span>
+ <span style="color:#ae81ff">1</span> file changed, <span style="color:#ae81ff">0</span> insertions<span style="color:#f92672">(</span>+<span style="color:#f92672">)</span>, <span style="color:#ae81ff">0</span> deletions<span style="color:#f92672">(</span>-<span style="color:#f92672">)</span>
+ delete mode <span style="color:#ae81ff">100644</span> another.txt
+
+% git log --oneline
+c7e6a0d <span style="color:#f92672">(</span>HEAD -&gt; another<span style="color:#f92672">)</span> Revert <span style="color:#e6db74">&#34;Add another.txt&#34;</span>
+c96fdd3 Add another.txt
+059f478 <span style="color:#f92672">(</span>feature, dev<span style="color:#f92672">)</span> Hello, World!
+5f518df Add file.txt
+
+% git reset HEAD~1        <span style="color:#75715e"># Notice that changes done by the revert commit are still there</span>
+Unstaged changes after reset:
+D       another.txt
+
+% git log --oneline       <span style="color:#75715e"># But the commit is gone!</span>
+c96fdd3 <span style="color:#f92672">(</span>HEAD -&gt; another<span style="color:#f92672">)</span> Add another.txt
+059f478 <span style="color:#f92672">(</span>feature, dev<span style="color:#f92672">)</span> Hello, World!
+5f518df Add file.txt
+
+% git restore another.txt <span style="color:#75715e"># Manually restore the file</span>
+
+% git status
+On branch another
+nothing to commit, working tree clean
+</code></pre></div><p>Instead of just <code>git reset HEAD~1</code> we can use a more destructive form - <code>git reset HEAD~1 --hard</code>, which will restore all the files changed by the commits we reset.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git revert HEAD <span style="color:#75715e"># Revert again</span>
+Removing another.txt
+<span style="color:#f92672">[</span>another 5a1efc0<span style="color:#f92672">]</span> Revert <span style="color:#e6db74">&#34;Add another.txt&#34;</span>
+ <span style="color:#ae81ff">1</span> file changed, <span style="color:#ae81ff">0</span> insertions<span style="color:#f92672">(</span>+<span style="color:#f92672">)</span>, <span style="color:#ae81ff">0</span> deletions<span style="color:#f92672">(</span>-<span style="color:#f92672">)</span>
+ delete mode <span style="color:#ae81ff">100644</span> another.txt
+
+% git reset HEAD~1 --hard
+HEAD is now at c96fdd3 Add another.txt
+
+% git status      <span style="color:#75715e"># All is gone!</span>
+On branch another
+nothing to commit, working tree clean
+</code></pre></div><p>Be careful with that though.</p>
+<blockquote>
+<p>Remember the golden rule! Do <strong>not</strong> erase the published history. <strong>Never</strong>.</p>
+</blockquote>
+<h4 id="merge">Merge</h4>
+<p>It&rsquo;s time to pull our changes together.</p>
+<h5 id="fast-forward">Fast-forward</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git log --oneline
+c96fdd3 <span style="color:#f92672">(</span>HEAD -&gt; another<span style="color:#f92672">)</span> Add another.txt
+059f478 <span style="color:#f92672">(</span>feature, dev<span style="color:#f92672">)</span> Hello, World!
+5f518df Add file.txt
+
+% git switch dev    <span style="color:#75715e"># First, switch back to the branch into which we want to merge to</span>
+Switched to branch <span style="color:#e6db74">&#39;dev&#39;</span>
+
+% git merge another <span style="color:#75715e"># Do the merge</span>
+Updating 059f478..c96fdd3
+Fast-forward        <span style="color:#75715e"># Note the `Fast-forward` here!</span>
+ another.txt | <span style="color:#ae81ff">0</span>
+ <span style="color:#ae81ff">1</span> file changed, <span style="color:#ae81ff">0</span> insertions<span style="color:#f92672">(</span>+<span style="color:#f92672">)</span>, <span style="color:#ae81ff">0</span> deletions<span style="color:#f92672">(</span>-<span style="color:#f92672">)</span>
+ create mode <span style="color:#ae81ff">100644</span> another.txt
+
+% git log --oneline
+c96fdd3 <span style="color:#f92672">(</span>HEAD -&gt; dev, another<span style="color:#f92672">)</span> Add another.txt
+059f478 <span style="color:#f92672">(</span>feature<span style="color:#f92672">)</span> Hello, World!
+5f518df Add file.txt
+</code></pre></div><p>The pointer to the <code>dev</code> branch has moved to the position of the <code>another</code> branch. It happened because the <code>dev</code> was a direct ancestor of the branch that we want to merge in so Git just moves the pointer which is called &ldquo;fast-forwarding&rdquo;.</p>
+<h5 id="merge-commit">Merge Commit</h5>
+<p>But let&rsquo;s say our history in the <code>dev</code> branch diverged a bit from the <code>feature</code> branch that we want to merge. Let&rsquo;s create some changes on the <code>feature</code> branch and merge them.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">% git switch feature
+Switched to branch <span style="color:#e6db74">&#39;feature&#39;</span>
+
+% touch feature.txt  <span style="color:#75715e"># Create a file</span>
+
+% git add feature.txt
+
+% git commit -m <span style="color:#e6db74">&#39;Add feature.txt&#39;</span>
+<span style="color:#f92672">[</span>feature 5379073<span style="color:#f92672">]</span> Add feature.txt
+ <span style="color:#ae81ff">1</span> file changed, <span style="color:#ae81ff">0</span> insertions<span style="color:#f92672">(</span>+<span style="color:#f92672">)</span>, <span style="color:#ae81ff">0</span> deletions<span style="color:#f92672">(</span>-<span style="color:#f92672">)</span>
+ create mode <span style="color:#ae81ff">100644</span> feature.txt
+
+% git log --oneline  <span style="color:#75715e"># We no longer see the `dev` pointer in here!</span>
+<span style="color:#ae81ff">5379073</span> <span style="color:#f92672">(</span>HEAD -&gt; feature<span style="color:#f92672">)</span> Add feature.txt
+059f478 Hello, World!
+5f518df Add file.txt
+
+% git switch dev
+Switched to branch <span style="color:#e6db74">&#39;dev&#39;</span>
+
+% git merge feature  <span style="color:#75715e"># Now we see something different</span>
+Merge made by the <span style="color:#e6db74">&#39;recursive&#39;</span> strategy.
+ feature.txt | <span style="color:#ae81ff">0</span>
+ <span style="color:#ae81ff">1</span> file changed, <span style="color:#ae81ff">0</span> insertions<span style="color:#f92672">(</span>+<span style="color:#f92672">)</span>, <span style="color:#ae81ff">0</span> deletions<span style="color:#f92672">(</span>-<span style="color:#f92672">)</span>
+ create mode <span style="color:#ae81ff">100644</span> feature.txt
+
+% git log --oneline  <span style="color:#75715e"># This looks confusing</span>
+e598ff0 <span style="color:#f92672">(</span>HEAD -&gt; dev<span style="color:#f92672">)</span> Merge branch <span style="color:#e6db74">&#39;feature&#39;</span> into dev
+<span style="color:#ae81ff">5379073</span> <span style="color:#f92672">(</span>feature<span style="color:#f92672">)</span> Add feature.txt
+c96fdd3 <span style="color:#f92672">(</span>another<span style="color:#f92672">)</span> Add another.txt
+059f478 Hello, World!
+5f518df Add file.txt
+
+% git log --graph --oneline <span style="color:#75715e"># Check the `git log --help`!</span>
+*   e598ff0 <span style="color:#f92672">(</span>HEAD -&gt; dev<span style="color:#f92672">)</span> Merge branch <span style="color:#e6db74">&#39;feature&#39;</span> into dev
+|<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>| * <span style="color:#ae81ff">5379073</span> <span style="color:#f92672">(</span>feature<span style="color:#f92672">)</span> Add feature.txt
+* | c96fdd3 <span style="color:#f92672">(</span>another<span style="color:#f92672">)</span> Add another.txt
+|/
+* 059f478 Hello, World!
+* 5f518df Add file.txt
+</code></pre></div><p>Now, since Git can&rsquo;t simply move the pointer - it automatically resolved all the differences between two branches and create a <em>merge commit</em>. Some Git conventions rely on <em>merge commits</em> to keep the history pretty but we&rsquo;ll not discuss it today.</p>
+<h5 id="merge-conflicts">Merge Conflicts</h5>
+<p>Sometimes Git&rsquo;s automatic merge resolving tool fails because two branches changed the same files at some point. Such conflicts require a manual intervention. You can read about ways to resolve such conflict in <a href="https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging">the Git Book</a>.</p>
 <h2 id="remote">Remote</h2>
 <p>Alright, we&rsquo;ve made some changes in our local Git repository. But how do we share it to cooperate with other developers?</p>
 <p>git remote
@@ -279,10 +533,6 @@ git pull</p>
             <a href="https://hipony.github.io/posts/standard-support/"><i class="fa fa-chevron-circle-left"></i> Falsehoods C&#43;&#43; Programmers Believe About Standard Version Support</a>
         </li>
         
-        
-        <li>
-            <a href="https://hipony.github.io/posts/basic-cmake/">CMake 101 <i class="fa fa-chevron-circle-right"></i> </a>
-        </li>
         
     </ul>
 </section>
