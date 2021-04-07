@@ -29,9 +29,9 @@ Take for example the [ranges-v3 library](https://github.com/ericniebler/range-v3
 
 ## Compilers support a certain standard
 
-I often see beginners asking when a certain compiler will support C++XX when they hear that the next ISO standard is published. For people familiar with the C++ ecosystem this question doesn't quit make sense. Compilers start to implement features even before the standard is finalized and may keep doing so for multiple versions forward, gradually releasing separate bits as they're ready.
+I often see beginners asking when a certain compiler will support C++XX when they hear that the next ISO standard is published. For people familiar with the C++ ecosystem this question doesn't quite make sense. Compilers start to implement features even before the standard is finalized and may keep doing so for multiple versions forward, gradually releasing separate bits as they're ready.
 
-Quite often some features are behind additional compiler flags such as the `/permissve-` flag in MSVC (no alternative tokens without it!) or the `-lstdc++fs` in GCC (to be able to use `std::filesystem` pre GCC 10).
+Quite often some features are behind additional compiler flags such as the `/permissive-` flag in MSVC (no alternative tokens without it!) or the `-lstdc++fs` in GCC (to be able to use `std::filesystem` pre GCC 10).
 
 Or some features may be in the `experimental` namespace, which require quite non-trivial feature detection logic to depend on. In some cases, even if the header is present, [compilers will not allow to use such headers unless you pass correct flags](https://godbolt.org/z/eh76M6).
 
@@ -51,7 +51,7 @@ The only compiler version that we can be sure of is the one used during developm
 
 Big industry standard libraries such as [Boost](https://github.com/boostorg/asio/blob/develop/include/boost/asio/detail/config.hpp#L95) and [Qt](https://code.woboq.org/qt5/qtbase/src/corelib/global/qcompilerdetection.h.html) do a tremendous amount of work to correctly implement reliable cross-platform feature detection and conform to it.
 
-The issue is that it's not enough to simply copy paste feature detection logic from big libraries, as a library author one must know where to apply the polyfil macro and it's very tricky to do especially for smaller features.
+The issue is that it's not enough to simply copy paste feature detection logic from big libraries. A library author must know where to apply the polyfil macro and it's very tricky to do especially for smaller features.
 
 Sometimes authors do a shortcut (I don't have a Mac, how can I know if my library supports it?) and simply check [public lists of supported features](https://en.cppreference.com/w/cpp/compiler_support). But such lists tend to get outdated or contain not a full information, especially with respect to the library support.
 
